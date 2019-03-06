@@ -1,0 +1,16 @@
+- name: Receive information about the cloud from clouds.yaml
+  os_client_config:
+    clouds: [ "{{ cloud }}" ]
+
+- name: Render cloud init script
+  set_fact:
+    cloudinit: "{{ lookup('template', './cloudinit.j2') }}"
+
+- import_tasks: create_master_instance.yml
+  when: "group == 'master'"
+
+- import_tasks: create_slave_instance_daemon_set.yml
+  when:  "group == 'slaves-daemon-set'"
+
+- import_tasks: create_slave_instance_random_placement.yml
+  when: "group == 'slaves-general-load'"

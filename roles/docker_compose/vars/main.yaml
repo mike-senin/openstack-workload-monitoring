@@ -1,0 +1,3 @@
+exporter_port: 9100
+
+docker_compose_folder: /home/ubuntu/monitoring

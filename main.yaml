@@ -1,0 +1,58 @@
+---
+- name: Include basic vars for localhost hosts
+  hosts: localhost
+  tasks:
+    - name: Include variables
+      include_vars: vars/main.yaml
+
+- name: Create instances
+  hosts: localhost
+#  strategy: free
+  roles:
+    - role: create_os_resources
+      vars:
+        group: 'master'
+        instance_count: 1
+        instance_name: 'prometheus-master'
+        assign_floating_ip: true
+
+    - role: create_os_resources
+      vars:
+        group: 'slaves-daemon-set'
+        instance_name: 'prometheus-slave'
+        assign_floating_ip: true
+
+    - role: create_os_resources
+      vars:
+        group: 'slaves-general-load'
+        instance_count: 3
+        instance_name: 'prometheus-slave'
+        assign_floating_ip: false
+
+- name: Include basic vars for all hosts
+  hosts: all
+  tasks:
+  - name: Include variables
+    include_vars: vars/main.yaml
+
+- name: Deploy monitoring master machine
+  hosts: master
+  become_user: root
+  become: yes
+  environment:
+    http_proxy: "{{ http_proxy }}"
+    https_proxy: "{{ http_proxy }}"
+  roles:
+    - { role: common }
+    - { role: docker }
+    - { role: docker_compose }
+
+- name: Deploy workload slaves
+  hosts: slaves-daemon-set
+  become_user: root
+  become: yes
+  environment:
+    http_proxy: "{{ http_proxy }}"
+    https_proxy: "{{ http_proxy }}"
+  roles:
+    - { role: common }

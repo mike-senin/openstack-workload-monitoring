@@ -1,0 +1,14 @@
+[all]
+localhost ansible_connection=local
+
+[ubuntu-18.04:children]
+master
+slaves-general-load
+slaves-daemon-set
+
+[ubuntu-18.04:vars]
+ansible_python_interpreter=/usr/bin/python3
+
+[slaves-general-load]
+[slaves-daemon-set]
+[master]

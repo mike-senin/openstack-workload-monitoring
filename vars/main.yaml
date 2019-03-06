@@ -1,0 +1,5 @@
+cloud:
+
+http_proxy:
+
+instance_manage_user: ubuntu
