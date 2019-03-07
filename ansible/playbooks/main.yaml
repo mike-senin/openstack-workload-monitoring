@@ -1,12 +1,10 @@
 - hosts: all
-  
   tasks:
     - name: Create a new instance and attaches to a network and passes metadata to the instance
       os_server:
            state: present
            auth:
              auth_url: http://10.147.204.76:35357
-#/v3
              username: admin
              password: fDMBVaSmcgp1TzGJ
              project_name: mons
@@ -16,14 +14,11 @@
            region_name: RegionOne
            name: ansible-test-vm
            image: 2f08611c-d798-4a53-a161-fdc49b440ec5
-           # TODO (msenin): create key
            key_name: mons
            timeout: 200
-           # TODO (msenin): use flavor with ephemerals
            flavor: da148996-dfbc-4dfb-856f-8f4a229df5f9
            nics:
              - net-id: d8f7de70-7c25-4c04-b111-12222c6068dd
-             #- net-name: another_network
            meta:
              hostname: test1
              group: uge_master
