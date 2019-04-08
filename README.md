@@ -63,12 +63,12 @@ $ ansible-playbook -i hosts --private-key=<path-to-mon.pem> main.yaml
 ```
 
 ## Todos
-- Check ansible proxy
-- Create and attach volumes for each service (for datastore)
-- Optimise roles
 - Add openstack resources creation - project, private key, security group, network, etc.
-- Add template for cloudinit
+- Migrate cloud init logic to ansible role
+- Create and attach volumes for each service (for datastore)
 - Make tasks async
+- Optimise roles
+- Extend documentation
 - Add new alert rule - ping / curl destination from external network and fire alert once external network is unavailable
 - Add dockerfile
 - Add kitchen: ansible-playbook --syntax-check
