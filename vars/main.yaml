@@ -1,5 +1,5 @@
-cloud:
+cloud: jse3
 
-http_proxy:
+http_proxy: http://10.144.106.132:8678
 
 instance_manage_user: ubuntu

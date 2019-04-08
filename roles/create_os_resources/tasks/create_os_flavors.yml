@@ -1,0 +1,11 @@
+- name: "Create 'tiny' flavor with 1024MB of RAM, 1 virtual CPU, and 10GB of local disk, and 10GB of ephemeral."
+  os_nova_flavor:
+    validate_certs: no
+    cloud: "{{ cloud }}"
+    state: present
+    # TODO (msenin): get from config
+    name: monitoring
+    ram: 1024
+    vcpus: 1
+    disk: 10
+    ephemeral: 10

@@ -1,0 +1,7 @@
+# Creates a key pair with the running users public key
+- os_keypair:
+    validate_certs: no
+    cloud: "{{ cloud }}"
+    state: present
+    name: ansible_key
+    public_key_file: "{{ public_key_path }}"

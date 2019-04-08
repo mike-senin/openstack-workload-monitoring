@@ -1,0 +1,44 @@
+- os_security_group:
+    validate_certs: no
+    cloud: "{{ cloud }}"
+    state: present
+    # TODO (msenin): move it to variables
+    name: monitoring
+    project: monitoring
+    description: Security group for workload monitoring instances
+
+- os_security_group_rule:
+    validate_certs: no
+    cloud: "{{ cloud }}"
+    # TODO (msenin): move it to variables
+    project: monitoring
+    security_group: monitoring
+    protocol: tcp
+    port_range_min: 80
+    port_range_max: 80
+    remote_ip_prefix: 0.0.0.0/0
+
+- os_security_group_rule:
+    validate_certs: no
+    cloud: "{{ cloud }}"
+    # TODO (msenin): move it to variables
+    project: monitoring
+    security_group: monitoring
+    protocol: icmp
+    remote_ip_prefix: 0.0.0.0/0
+
+- os_security_group_rule:
+    validate_certs: no
+    cloud: "{{ cloud }}"
+    # TODO (msenin): move it to variables
+    security_group: monitoring
+    project: monitoring
+    protocol: tcp
+    port_range_min: "{{ item }}"
+    port_range_max: "{{ item }}"
+    remote_ip_prefix: 0.0.0.0/0
+  with_items:
+    - 22
+    - 9080
+    - 9090
+    - 9100

@@ -6,6 +6,15 @@
   set_fact:
     cloudinit: "{{ lookup('template', './cloudinit.j2') }}"
 
+#- include_tasks: "{{ item }}"
+#  with_items:
+#    - create_os_project.yml
+#    - create_os_flavors.yml
+#    - create_os_keypair.yml
+#    - create_os_networks.yml
+#    - create_os_security_group.yml
+#  tags: ['init-base-os-resources']
+
 - import_tasks: create_master_instance.yml
   when: "group == 'master'"
 

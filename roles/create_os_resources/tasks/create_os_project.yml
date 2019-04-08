@@ -1,0 +1,10 @@
+- os_project:
+    cloud: "{{ cloud }}"
+    endpoint_type: admin
+    state: present
+    # TODO (msenin): move to variables
+    name: monitoring
+    description: Project for workload monitoring solution
+    # TODO (msenin): get from conf
+    domain_id: default
+    enabled: True

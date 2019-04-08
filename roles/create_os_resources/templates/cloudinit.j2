@@ -1,6 +1,4 @@
 #cloud-config
-packages:
-  - prometheus-node-exporter
 preserve_sources_list: true
 apt_mirror: http://archive.ubuntu.com/ubuntu
 apt:
@@ -26,6 +24,3 @@ apt:
     deb $PRIMARY $RELEASE multiverse
     deb-src $PRIMARY $RELEASE multiverse
     deb $SECURITY $RELEASE-security multiverse
-  proxy: {{ http_proxy }}
-  http_proxy: {{ http_proxy }}
-  https_proxy: {{ http_proxy }}
