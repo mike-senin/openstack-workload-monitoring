@@ -26,10 +26,18 @@
     state: present
     update_cache: yes
 
+- name: Pip force upgrade
+  pip: 
+    name: pip
+    extra_args: --upgrade
+  environment:
+    http_proxy: "{{ http_proxy }}"
+    https_proxy: "{{ http_proxy }}"
+
 - name: Install docker compose
   pip:
     name: docker-compose
-    state: forcereinstall
+    #state: forcereinstall
   # TODO (msenin): move to root main.yaml
   environment:
     http_proxy: "{{ http_proxy }}"

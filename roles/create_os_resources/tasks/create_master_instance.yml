@@ -25,6 +25,12 @@
     instance_name: "{{ os_hosts['server']['name'] }}"
     ansible_host: "{{ os_hosts['server']['public_v4'] }}"
 
+- debug:
+    msg: "{{ groups }}"
+
+- set_fact:
+    master_instance_ip: "{{ groups['master'][0] }}"
+
 - name: Wait for system to become reachable
   wait_for_connection:
     timeout: "{{ waiter_timeout }}"

@@ -1,12 +1,7 @@
 # Creates a key pair with the running users public key
 - os_keypair:
+    validate_certs: no
     cloud: "{{ cloud }}"
     state: present
     name: ansible_key
-    public_key_file: /home/me/.ssh/id_rsa.pub
-
-# Creates a new key pair and the private key returned after the run.
-- os_keypair:
-    cloud: "{{ cloud }}"
-    state: present
-    name: ansible_key
+    public_key_file: "{{ public_key_path }}"

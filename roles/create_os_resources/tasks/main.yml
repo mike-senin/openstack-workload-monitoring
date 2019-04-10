@@ -6,19 +6,20 @@
   set_fact:
     cloudinit: "{{ lookup('template', './cloudinit.j2') }}"
 
-- import_tasks:
-    - create_os_project.yml
-    - create_os_flavors.yml
-    - create_os_keypair.yml
-    - create_os_networks.yml
-    - create_os_security_group.yml
-  tags: ['init-base-os-resources']
+#- include_tasks: "{{ item }}"
+#  with_items:
+#    - create_os_project.yml
+#    - create_os_flavors.yml
+#    - create_os_keypair.yml
+#    - create_os_networks.yml
+#    - create_os_security_group.yml
+#  tags: ['init-base-os-resources']
 
 - import_tasks: create_master_instance.yml
-  tags: ['master']
+  when: "group == 'master'"
 
 - import_tasks: create_slave_instance_daemon_set.yml
-  tags: ['slaves-daemon-set']
+  when:  "group == 'slaves-daemon-set'"
 
 - import_tasks: create_slave_instance_random_placement.yml
-  tags: ['slaves-general-load']
+  when: "group == 'slaves-general-load'"
