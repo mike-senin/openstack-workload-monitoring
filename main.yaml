@@ -49,11 +49,12 @@
     https_proxy: "{{ http_proxy }}"
   roles:
     - { role: common }
+    - { role: squid }
     - { role: docker }
     - { role: docker_compose }
 
-- name: Deploy workload slaves
-  hosts: slaves-daemon-set, slaves-general-load
+- name: Deploy daemon set slaves
+  hosts: slaves-daemon-set
   become_user: root
   become: yes
   environment:
@@ -61,3 +62,13 @@
     https_proxy: "{{ http_proxy }}"
   roles:
     - { role: common }
+
+- name: Deploy workload slaves
+  hosts: slaves-general-load
+  become_user: root
+  become: yes
+  environment:
+    http_proxy: "{{ http_proxy }}"
+    https_proxy: "{{ http_proxy }}"
+  roles:
+  - { role: common }

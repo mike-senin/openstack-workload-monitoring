@@ -1,0 +1,15 @@
+- name: Install squid
+  apt:
+    name: squid
+    state: present
+    update_cache: yes
+
+- name: Set up prometheus config
+  template:
+    src: squid.j2
+    dest: "/etc/squid/squid.conf"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart squid
