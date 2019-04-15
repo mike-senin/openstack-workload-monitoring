@@ -29,6 +29,10 @@
 - set_fact:
     master_instance_ip: "{{ groups['master'][0] }}"
 
+- debug:
+    msg: "{{ hostvars[item] }}"
+  with_items: "{{ groups['master'] }}"
+
 - name: Add hosts to inventory
   add_host:
     name: "{{ item['server']['private_v4'] }}"
@@ -37,6 +41,8 @@
     instance_name: "{{ item['server']['name'] }}"
     ansible_host: "{{ item['server']['private_v4'] }}"
     ansible_ssh_common_args: '-o UserKnownHostsFile=/dev/null -o ProxyCommand="ssh -i {{ ansible_ssh_private_key_file }} -W %h:%p -q {{ instance_manage_user }}@{{ master_instance_ip }}"'
+    http_proxy: "{{ hostvars[master_instance_ip]['private_ip'] }}"
+    https_proxy: "{{ hostvars[master_instance_ip]['private_ip'] }}"
   loop: "{{ os_hosts.results }}"
 
 - name: Wait for system to become reachable

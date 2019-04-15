@@ -53,22 +53,24 @@
     - { role: docker }
     - { role: docker_compose }
 
-- name: Deploy daemon set slaves
-  hosts: slaves-daemon-set
-  become_user: root
-  become: yes
-  environment:
-    http_proxy: "{{ http_proxy }}"
-    https_proxy: "{{ http_proxy }}"
-  roles:
-    - { role: common }
+#- name: Deploy daemon set slaves
+#  hosts: slaves-daemon-set
+#  become_user: root
+#  become: yes
+#  environment:
+#    http_proxy: "{{ http_proxy }}"
+#    https_proxy: "{{ http_proxy }}"
+#  roles:
+#    - { role: common }
 
 - name: Deploy workload slaves
   hosts: slaves-general-load
   become_user: root
   become: yes
-  environment:
-    http_proxy: "{{ http_proxy }}"
-    https_proxy: "{{ http_proxy }}"
+#  environment:
+#    http_proxy: "{{ hostvars[master_instance_ip]['private_ip'] }}"
+#    https_proxy: "{{ hostvars[master_instance_ip]['private_ip'] }}"
+#    http_proxy: "{{ http_proxy }}"
+#    https_proxy: "{{ http_proxy }}"
   roles:
   - { role: common }
