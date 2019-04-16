@@ -12,7 +12,6 @@
 #      tags: ['init-base-os-resources']
 #
     - role: create_os_resources
-      tags: ['master']
       vars:
         group: 'master'
         instance_count: 1
@@ -20,14 +19,12 @@
         assign_floating_ip: true
 
     - role: create_os_resources
-      tags: ['slaves-daemon-set']
       vars:
         group: 'slaves-daemon-set'
         instance_name: 'prometheus-slave'
         assign_floating_ip: true
 
     - role: create_os_resources
-      tags: ['slaves-general-load']
       vars:
         group: 'slaves-general-load'
         instance_count: 1
@@ -67,10 +64,8 @@
   hosts: slaves-general-load
   become_user: root
   become: yes
-#  environment:
-#    http_proxy: "{{ hostvars[master_instance_ip]['private_ip'] }}"
-#    https_proxy: "{{ hostvars[master_instance_ip]['private_ip'] }}"
-#    http_proxy: "{{ http_proxy }}"
-#    https_proxy: "{{ http_proxy }}"
+  environment:
+    http_proxy:
+    https_proxy:
   roles:
   - { role: common }

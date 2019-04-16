@@ -26,12 +26,17 @@
     ansible_host: "{{ os_hosts['server']['public_v4'] }}"
     private_ip: "{{ os_hosts['server']['private_v4'] }}"
 
-#- set_fact:
-#    master_instance_ip: "{{ groups['master'][0] }}"
+- name: 123
+  debug:
+    msg: "{{ hostvars[groups['master'][0]] }}"
 
-- debug:
-    msg: "{{ hostvars[item] }}"
-  with_items: "{{ groups['master'] }}"
+- name: 123
+  debug:
+    msg: "==============================="
+
+- name: 123
+  debug:
+    msg: "{{ hostvars[groups['master'][0]]['ansible_eth0']['ipv4']['address'] }}"
 
 - name: Wait for system to become reachable
   wait_for_connection:
