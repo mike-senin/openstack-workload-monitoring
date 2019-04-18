@@ -2,7 +2,6 @@
     validate_certs: no
     cloud: "{{ cloud }}"
     state: present
-    # TODO (msenin): move it to variables
     name: "{{ sec_group_name }}"
     project: "{{ project_name }}"
     description: Security group for workload monitoring instances
@@ -10,7 +9,6 @@
 - os_security_group_rule:
     validate_certs: no
     cloud: "{{ cloud }}"
-    # TODO (msenin): move it to variables
     project: "{{ project_name }}"
     security_group: "{{ sec_group_name }}"
     protocol: tcp
