@@ -2,33 +2,29 @@
 # TODO: split on several plays
 - name: Create os resources
   hosts: localhost
-  vars_files:
-    - "vars/main.yaml"
   roles:
     - role: create_os_resources
 
 - name: Create instances
   hosts: localhost
-  vars_files:
-    - "vars/main.yaml"
   roles:
     # TODO: run it async way
     - role: create_os_instances
       vars:
         group: 'master'
+        # TODO (msenin): use variable here
         instance_count: 1
         instance_name: 'prometheus-master'
-        assign_floating_ip: true
 
     - role: create_os_instances
       vars:
         group: 'slaves-daemon-set'
         instance_name: 'prometheus-slave'
-        assign_floating_ip: true
 
     - role: create_os_instances
       vars:
         group: 'slaves-general-load'
+        # TODO (msenin): use variable here
         instance_count: 1
         instance_name: 'prometheus-slave'
         assign_floating_ip: false
@@ -37,17 +33,9 @@
   hosts: master
   become_user: root
   become: yes
-  vars_files:
-    - "vars/main.yaml"
-#  environment:
-#    http_proxy: "{{ external_proxy_address }}"
-#    https_proxy: "{{ external_proxy_address }}"
   roles:
     - role: common
     - role: squid
-      vars:
-        proxy_host: "{{ proxy_host }}"
-        proxy_port: "{{ proxy_port }}"
     - role: docker
     - role: docker_compose
 
@@ -55,11 +43,9 @@
   hosts: slaves-daemon-set
   become_user: root
   become: yes
-  vars_files:
-    - "vars/main.yaml"
-  environment:
-    http_proxy: "{{ external_proxy_address }}"
-    https_proxy: "{{ external_proxy_address }}"
+#  environment:
+#    http_proxy: "{{ external_proxy_address }}"
+#    https_proxy: "{{ external_proxy_address }}"
   roles:
     - role: common
 
@@ -67,8 +53,6 @@
   hosts: slaves-general-load
   become_user: root
   become: yes
-  vars_files:
-    - "vars/main.yaml"
   roles:
   - role: common
     vars:

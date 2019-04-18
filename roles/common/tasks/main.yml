@@ -6,16 +6,17 @@
   retries: 50
   delay: 5
 
-- name: Gather all facts of cloud init
-  cloud_init_data_facts:
+#- name: Gather all facts of cloud init
+#  cloud_init_data_facts:
 
+# TODO (msenin): double-check and disable, that's needed only for master host
 - name: Create system.d conf directory
   file:
     path: /etc/systemd/system.conf.d/
     state: directory
     recurse: yes
 
-# TODO (msenin): double-check and disable
+# TODO (msenin): double-check and disable, that's needed only for master host
 - name: Set up system proxy
   template:
     src: 10-default-env.j2
@@ -38,7 +39,7 @@
     group: root
     mode: 0644
 
-- name: Update profile for PythonBrew for foo user
+- name: Add proxy export to /etc/profile
   lineinfile:
     dest: /etc/profile
     line: |

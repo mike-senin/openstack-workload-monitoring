@@ -1,2 +1,2 @@
-proxy_host:
-proxy_port:
+proxy_host: "{{ external_proxy_host }}"
+proxy_port: "{{ external_proxy_port }}"

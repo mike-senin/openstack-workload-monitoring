@@ -1,20 +1,2 @@
-# TODO (msenin): use created resources
-project_name: monitoring
-#
-security_groups: mons
-key_name: mons
-
-image_id: c06cf767-d551-4978-95b9-31ceb7478579
-flavor_id: da148996-dfbc-4dfb-856f-8f4a229df5f9
-
-# ----
-
-net_id: d8f7de70-7c25-4c04-b111-12222c6068dd
-
-floating_ip_pools: ext-net
-
 apt_mirror: http://archive.ubuntu.com/ubuntu
 waiter_timeout: 900
-availability_zone: nova
-
-# ----

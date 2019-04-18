@@ -26,13 +26,17 @@
     - docker-ce
     - python3-pip
 
-- name: Upgrade pip and install docker compose
+- name: Upgrade pip
   pip: 
-    name: "{{ item }}"
+    name: pip
     extra_args: --upgrade
   environment:
     http_proxy: "{{ http_proxy }}"
     https_proxy: "{{ http_proxy }}"
-  with_items:
-    - pip
-    - docker-compose
+
+- name: Install docker compose
+  pip:
+    name: docker-compose
+  environment:
+    http_proxy: "{{ http_proxy }}"
+    https_proxy: "{{ http_proxy }}"

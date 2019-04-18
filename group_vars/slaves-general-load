@@ -1,0 +1,3 @@
+# use internal squid proxy instead of external
+http_proxy: "{{ external_proxy_address }}"
+https_proxy: "{{ external_proxy_address }}"
