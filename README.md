@@ -4,7 +4,15 @@ This solution allows to prepare test workload within environment and monitor ins
 
 By default ansible playbook creates one basic monitor VM that has prometheus, alertmanager and alerta as docker compose services at the top of itself. In addition it generates dedicated count of dummy VMs with prometheus exporter that used as monitoring goals to check the instances availability.
 
+
+## Glossary
+"Daemon Set"
+TBD
+
+## Architecture overview
 ![Architecture diagram](docs/architecture_diagram.png?raw=true "Architecture diagram")
+
+TBD
 
 ## Installation
 ### Install pip requirements
@@ -16,6 +24,7 @@ $ .venv/bin/activate
 $ pip install -r requirements.txt
 
 ```
+
 ### Prepare clouds.yaml
 You need to fill up and put `clouds.yaml` file to root project folder. Content example:
 ```yaml

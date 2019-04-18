@@ -2,8 +2,7 @@
     cloud: "{{ cloud }}"
     endpoint_type: admin
     state: present
-    # TODO (msenin): move to variables
-    name: monitoring
+    name: "{{ project_name }}"
     description: Project for workload monitoring solution
     # TODO (msenin): get from conf
     domain_id: default

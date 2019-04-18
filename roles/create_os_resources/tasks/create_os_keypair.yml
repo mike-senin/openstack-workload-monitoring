@@ -3,5 +3,5 @@
     validate_certs: no
     cloud: "{{ cloud }}"
     state: present
-    name: ansible_key
+    name: "keypair_name"
     public_key_file: "{{ public_key_path }}"

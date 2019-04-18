@@ -2,24 +2,10 @@
   os_client_config:
     clouds: [ "{{ cloud }}" ]
 
-- name: Render cloud init script
-  set_fact:
-    cloudinit: "{{ lookup('template', './cloudinit.j2') }}"
-
-#- include_tasks: "{{ item }}"
-#  with_items:
-#    - create_os_project.yml
-#    - create_os_flavors.yml
-#    - create_os_keypair.yml
-#    - create_os_networks.yml
-#    - create_os_security_group.yml
-#  tags: ['init-base-os-resources']
-
-- import_tasks: create_master_instance.yml
-  when: "group == 'master'"
-
-- import_tasks: create_slave_instance_daemon_set.yml
-  when:  "group == 'slaves-daemon-set'"
-
-- import_tasks: create_slave_instance_random_placement.yml
-  when: "group == 'slaves-general-load'"
+- include_tasks: "{{ item }}"
+  with_items:
+  - create_os_project.yml
+  - create_os_flavors.yml
+  - create_os_keypair.yml
+  - create_os_networks.yml
+  - create_os_security_group.yml

@@ -14,37 +14,25 @@
     filename: docker
     update_cache: yes
 
-- name: Install docker-ce package
+- name: Install docker-ce, python3-pip packages
   apt:
-    name: docker-ce
+    name: "{{ item }}"
     state: present
     update_cache: yes
   environment:
     http_proxy: "{{ http_proxy }}"
     https_proxy: "{{ http_proxy }}"
+  with_items:
+    - docker-ce
+    - python3-pip
 
-- name: Install python3-pip package
-  apt:
-    name: python3-pip
-    state: present
-    update_cache: yes
-  environment:
-    http_proxy: "{{ http_proxy }}"
-    https_proxy: "{{ http_proxy }}"
-
-- name: Pip force upgrade
+- name: Upgrade pip and install docker compose
   pip: 
-    name: pip
+    name: "{{ item }}"
     extra_args: --upgrade
   environment:
     http_proxy: "{{ http_proxy }}"
     https_proxy: "{{ http_proxy }}"
-
-- name: Install docker compose
-  pip:
-    name: docker-compose
-    #state: forcereinstall
-  # TODO (msenin): move to root main.yaml
-  environment:
-    http_proxy: "{{ http_proxy }}"
-    https_proxy: "{{ http_proxy }}"
+  with_items:
+    - pip
+    - docker-compose

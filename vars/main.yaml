@@ -1,5 +1,8 @@
 cloud: jse3
 
-http_proxy: http://10.144.106.132:8678
+external_proxy_host: 10.144.106.132
+external_proxy_protocol: http
+external_proxy_port: 8678
+external_proxy_address: "{{ proxy_protocol }}://{{ proxy_host }}:{{ proxy_port }}"
 
 instance_manage_user: ubuntu
