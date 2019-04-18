@@ -25,18 +25,10 @@
     instance_name: "{{ os_hosts['server']['name'] }}"
     ansible_host: "{{ os_hosts['server']['public_v4'] }}"
     private_ip: "{{ os_hosts['server']['private_v4'] }}"
+    ansible_ssh_common_args: '-o UserKnownHostsFile=/dev/null'
 
-- name: 123
-  debug:
-    msg: "{{ hostvars[groups['master'][0]] }}"
-
-- name: 123
-  debug:
-    msg: "==============================="
-
-- name: 123
-  debug:
-    msg: "{{ hostvars[groups['master'][0]]['ansible_eth0']['ipv4']['address'] }}"
+- debug:
+    msg: "{{ hostvars[groups['master'][0]]['private_ip'] }}"
 
 - name: Wait for system to become reachable
   wait_for_connection:

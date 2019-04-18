@@ -1,12 +1,8 @@
 ---
-- name: Include basic vars for localhost hosts
-  hosts: localhost
-  tasks:
-    - name: Include variables
-      include_vars: vars/main.yaml
-
 - name: Create instances
   hosts: localhost
+  vars_files:
+    - "vars/main.yaml"
   roles:
 #    - role: create_os_resources
 #      tags: ['init-base-os-resources']
@@ -31,16 +27,12 @@
         instance_name: 'prometheus-slave'
         assign_floating_ip: false
 
-- name: Include basic vars for all hosts
-  hosts: all
-  tasks:
-  - name: Include variables
-    include_vars: vars/main.yaml
-
 - name: Deploy monitoring master machine
   hosts: master
   become_user: root
   become: yes
+  vars_files:
+    - "vars/main.yaml"
   environment:
     http_proxy: "{{ http_proxy }}"
     https_proxy: "{{ http_proxy }}"
@@ -50,22 +42,26 @@
     - { role: docker }
     - { role: docker_compose }
 
-#- name: Deploy daemon set slaves
-#  hosts: slaves-daemon-set
-#  become_user: root
-#  become: yes
-#  environment:
-#    http_proxy: "{{ http_proxy }}"
-#    https_proxy: "{{ http_proxy }}"
-#  roles:
-#    - { role: common }
+- name: Deploy daemon set slaves
+  hosts: slaves-daemon-set
+  become_user: root
+  become: yes
+  vars_files:
+    - "vars/main.yaml"
+  environment:
+    http_proxy: "{{ http_proxy }}"
+    https_proxy: "{{ http_proxy }}"
+  roles:
+    - { role: common }
 
 - name: Deploy workload slaves
   hosts: slaves-general-load
   become_user: root
   become: yes
-  environment:
-    http_proxy:
-    https_proxy:
+  vars_files:
+    - "vars/main.yaml"
   roles:
-  - { role: common }
+  - role: common
+    vars:
+      http_proxy: "http://{{ hostvars[groups['master'][0]]['private_ip'] }}:3128"
+      https_proxy: "http://{{ hostvars[groups['master'][0]]['private_ip'] }}:3128"

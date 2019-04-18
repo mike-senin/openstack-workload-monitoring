@@ -54,3 +54,6 @@
     name: prometheus-node-exporter
     state: present
     update_cache: yes
+  environment:
+    http_proxy: "{{ http_proxy }}"
+    https_proxy: "{{ http_proxy }}"
