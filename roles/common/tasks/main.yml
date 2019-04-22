@@ -6,9 +6,6 @@
   retries: 50
   delay: 5
 
-#- name: Gather all facts of cloud init
-#  cloud_init_data_facts:
-
 # TODO (msenin): double-check and disable, that's needed only for master host
 - name: Create system.d conf directory
   file:
@@ -41,7 +38,7 @@
 
 - name: Add proxy export to /etc/profile
   lineinfile:
-    dest: /etc/profile
+    dest: /etc/profile.d/Z100-custom-proxy.sh
     line: |
       export HTTP_PROXY={{ http_proxy }}
       export HTTPS_PROXY={{ http_proxy }}
