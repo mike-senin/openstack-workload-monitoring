@@ -1,5 +1,8 @@
+# move to inventory
 project_name: monitoring
 sec_group_name: monitoring
 flavor_name: monitoring
 keypair_name: monitoring
 public_key_path: /root/.ssh/id_rsa.pub
+network_name: monitoring
+subnet_name: monitoring

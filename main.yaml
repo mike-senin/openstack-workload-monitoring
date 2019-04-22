@@ -43,9 +43,6 @@
   hosts: slaves-daemon-set
   become_user: root
   become: yes
-#  environment:
-#    http_proxy: "{{ external_proxy_address }}"
-#    https_proxy: "{{ external_proxy_address }}"
   roles:
     - role: common
 

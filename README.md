@@ -71,13 +71,27 @@ From root project folder execute:
 $ ansible-playbook -i hosts --private-key=<path-to-mon.pem> main.yaml
 ```
 
+## Potential problems
+
+1. Squid proxy cache is incorrect
+Ways to fix: 
+
+a. restart squid
+
+b. remove cache from cache folders, recreate them and restart service
+
+2. External proxy is unavailable or slow
+The most obvious behaviour when you see timeouts errors during pip, apt commands execution or docker image pull. In this case restart manifests.
+   
+
 ## Todos
 - Add openstack resources creation - project, private key, security group, network, etc.
 - Migrate cloud init logic to ansible role
-- Create and attach volumes for each service (for datastore)
+- Create and attach volumes for each service for datastore as it should be split from system volume
 - Make tasks async
 - Optimise roles
 - Extend documentation
 - Add new alert rule - ping / curl destination from external network and fire alert once external network is unavailable
 - Add dockerfile
+- Make proxy peaces optional 
 - Add kitchen: ansible-playbook --syntax-check

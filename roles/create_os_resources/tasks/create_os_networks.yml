@@ -1,0 +1,18 @@
+- name: create openstack network for workloads
+  os_network:
+    cloud: "{{ cloud }}"
+    state: present
+    name: "{{ network_name }}"
+    external: false
+    validate_certs: no
+
+- name: create openstack subnet for workloads
+  os_subnet:
+    state: present
+    network_name: "{{ network_name }}"
+    name: "{{ subnet_name }}"
+    # TODO: move to variables
+    cidr: 192.168.0.0/24
+    dns_nameservers:
+    - 8.8.8.8
+    validate_certs: no
