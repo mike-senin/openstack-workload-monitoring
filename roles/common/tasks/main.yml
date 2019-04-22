@@ -50,6 +50,14 @@
 - name: Force systemd to reread configs (2.4 and above)
   systemd: daemon_reload=yes
 
+- name: Set up apt proxy
+  template:
+    src: proxy.j2
+    dest: /etc/apt/apt.conf.d/proxy.conf
+    owner: root
+    group: root
+    mode: 0644
+
 - name: Install prometheus node exporter
   apt:
     name: prometheus-node-exporter
