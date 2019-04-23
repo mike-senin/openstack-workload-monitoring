@@ -43,6 +43,8 @@
       export HTTP_PROXY={{ http_proxy }}
       export HTTPS_PROXY={{ http_proxy }}
     owner: root
+    state: present
+    create: yes
 
 - name: Force systemd to reread configs (2.4 and above)
   systemd: daemon_reload=yes
