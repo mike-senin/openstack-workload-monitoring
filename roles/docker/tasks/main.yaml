@@ -16,15 +16,12 @@
 
 - name: Install docker-ce, python3-pip packages
   apt:
-    name: "{{ item }}"
+    name: ['docker-ce', 'python3-pip']
     state: present
     update_cache: yes
   environment:
     http_proxy: "{{ http_proxy }}"
     https_proxy: "{{ http_proxy }}"
-  with_items:
-    - docker-ce
-    - python3-pip
 
 - name: Upgrade pip
   pip: 

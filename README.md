@@ -1,18 +1,34 @@
 # Openstack workload monitoring tool
 ## Description
-This solution allows to prepare test workload within environment and monitor instances availability during scheduled operations such as ceph or contrail upgrades.
+This solution allows to prepare test workloads within environment and monitor their availability during maintenance windows for operations such as ceph or contrail upgrades.
 
-By default ansible playbook creates one basic monitor VM that has prometheus, alertmanager and alerta as docker compose services at the top of itself. In addition it generates dedicated count of dummy VMs with prometheus exporter that used as monitoring goals to check the instances availability.
+By default ansible playbook creates instances in the particular monitoring project and apply specific roles on them.
+Architecture postulates to have one general monitor VM with prometheus, alertmanager and alerta services running as docker containers at the top. Other instances generate overall load at -.
+In addition it generates dedicated count of dummy VMs with prometheus exporter that used as monitoring goals to check the instances availability.
 
-
-## Glossary
-"Daemon Set"
-TBD
 
 ## Architecture overview
 ![Architecture diagram](docs/architecture_diagram.png?raw=true "Architecture diagram")
 
-TBD
+The logic of the monitoring solution is pretty simple. There is one host-aggregator which pings destination targets over both internal and external networks that gives us info regarding both 
+
+The monitoring solution has several assumptions:
+
+
+The services that supposed to be running at top of instances:
+- Prometheus
+- Alert Manager
+- Alerta
+- Prometheus Node Exporter
+- Squid Proxy Server
+
+There are three type of instances:
+- Master node
+  There supposes to be only one master node that has Prometheus, Alerta, Prometheus Node Exporter and Squid Proxy Server
+  TBD 
+- Daemon Set
+  These machines 
+- Regular workload instances 
 
 ## Installation
 ### Install pip requirements
@@ -87,6 +103,9 @@ The most obvious behaviour when you see timeouts errors during pip, apt commands
 ## Todos
 - Add openstack resources creation - project, private key, security group, network, etc.
 - Migrate cloud init logic to ansible role
+- Use dynamic inventory scripts, 
+- use instances metadata to identify roles (with dynamic inventory)
+- split playbooks based on components
 - Create and attach volumes for each service for datastore as it should be split from system volume
 - Make tasks async
 - Optimise roles
@@ -95,3 +114,6 @@ The most obvious behaviour when you see timeouts errors during pip, apt commands
 - Add dockerfile
 - Make proxy peaces optional 
 - Add kitchen: ansible-playbook --syntax-check
+- Fix warnings for apt
+- Move Squid Proxy to docker compose
+ 
