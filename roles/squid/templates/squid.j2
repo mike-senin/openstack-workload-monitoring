@@ -30,6 +30,7 @@ cache_dir null /dev/null
 cache_store_log none
 cache_access_log /dev/null
 coredump_dir /dev/null
+refresh_pattern .               0       0%      0
 
 {% if proxy_host is defined and proxy_port is defined %}
 cache_peer {{ proxy_host }} parent {{ proxy_port }} 0 no-query no-digest
