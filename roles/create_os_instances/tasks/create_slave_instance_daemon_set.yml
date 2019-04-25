@@ -13,11 +13,12 @@
     name: "{{ instance_name }}-{{ item.name.split('.')[0] }}"
     cloud: "{{ cloud }}"
     image: "{{ image_id }}"
-    key_name: "{{ key_name }}"
-    flavor: "{{ flavor_id }}"
-    security_groups: "{{ security_groups }}"
+    key_name: "{{ keypair_name }}"
+    flavor: "{{ slave_flavor_name }}"
+    security_groups: "{{ sec_group_name }}"
     floating_ip_pools: "{{ floating_ip_pools if assign_floating_ip == true else omit }}"
-    nics: [ net-id: "{{ net_id }}" ]
+    #nics: [ net-id: "{{ net_id }}" ]
+    network: "{{ network_name }}"
     userdata: "{{ cloudinit }}"
     availability_zone: "{{ availability_zone }}:{{ item.name.split('.')[0] }}"
     meta:

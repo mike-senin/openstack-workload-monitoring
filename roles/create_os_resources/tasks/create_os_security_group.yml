@@ -3,13 +3,13 @@
     cloud: "{{ cloud }}"
     state: present
     name: "{{ sec_group_name }}"
-    project: "{{ project_name }}"
+#    project: "{{ project_name }}"
     description: Security group for workload monitoring instances
 
 - os_security_group_rule:
     validate_certs: no
     cloud: "{{ cloud }}"
-    project: "{{ project_name }}"
+ #   project: "{{ project_name }}"
     security_group: "{{ sec_group_name }}"
     protocol: tcp
     port_range_min: 80
@@ -19,7 +19,7 @@
 - os_security_group_rule:
     validate_certs: no
     cloud: "{{ cloud }}"
-    project: "{{ project_name }}"
+ #   project: "{{ project_name }}"
     security_group: "{{ sec_group_name }}"
     protocol: icmp
     remote_ip_prefix: 0.0.0.0/0
@@ -28,7 +28,7 @@
     validate_certs: no
     cloud: "{{ cloud }}"
     security_group: "{{ sec_group_name }}"
-    project: "{{ project_name }}"
+ #   project: "{{ project_name }}"
     protocol: tcp
     port_range_min: "{{ item }}"
     port_range_max: "{{ item }}"

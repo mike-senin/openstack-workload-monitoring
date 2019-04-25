@@ -3,10 +3,10 @@ cloud: jse3
 floating_ip_pools: ext-net
 
 # TODO (msenin): use created resources - move to groups
-project_name: monitoring
+project_name: mons
 #
-security_groups: mons
-key_name: mons
+#security_groups: mons
+#key_name: mons
 
 image_id: c06cf767-d551-4978-95b9-31ceb7478579
 flavor_id: da148996-dfbc-4dfb-856f-8f4a229df5f9
@@ -14,3 +14,15 @@ net_id: d8f7de70-7c25-4c04-b111-12222c6068dd
 availability_zone: nova
 
 assign_floating_ip: true
+
+project_name: monitoring
+sec_group_name: monitoring
+flavor_name: monitoring
+keypair_name: monitoring
+network_name: monitoring
+subnet_name: monitoring
+
+master_flavor_name: "{{ flavor_name }}_master_node"
+slave_flavor_name: "{{ flavor_name }}_slave_node"
+
+public_key_path: /root/.ssh/id_rsa.pub

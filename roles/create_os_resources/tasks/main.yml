@@ -4,7 +4,6 @@
 
 - include_tasks: "{{ item }}"
   with_items:
-  - create_os_project.yml
   - create_os_flavors.yml
   - create_os_keypair.yml
   - create_os_networks.yml

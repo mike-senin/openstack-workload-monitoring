@@ -3,21 +3,21 @@
     validate_certs: no
     cloud: "{{ cloud }}"
     state: present
-    name: "{{ flavor_name }}_master_node"
+    name: "{{ master_flavor_name }}"
     # TODO (msenin): get from vars
-    ram: 3024
-    vcpus: 1
-    disk: 60
-    ephemeral: 0
+    ram: 4096
+    vcpus: 2
+    disk: 30
+    ephemeral: 30
 
 - name: "Create flavor that will be used for slave instances"
   os_nova_flavor:
     validate_certs: no
     cloud: "{{ cloud }}"
     state: present
-    name: "{{ flavor_name }}_slave_node"
+    name: "{{ slave_flavor_name }}"
     # TODO (msenin): get from vars
     ram: 1024
-    vcpus: 1
+    vcpus: 2
     disk: 10
     ephemeral: 0
